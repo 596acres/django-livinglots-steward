@@ -2,12 +2,9 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 
 from admin_enhancer.admin import EnhancedModelAdminMixin
-from django_monitor.admin import MonitorAdmin
-
-from .models import StewardNotification, StewardProject
 
 
-class BaseStewardAdminMixin(EnhancedModelAdminMixin):
+class StewardAdminMixin(EnhancedModelAdminMixin):
 
     def stewarded_target(self, obj):
         try:
@@ -20,27 +17,27 @@ class BaseStewardAdminMixin(EnhancedModelAdminMixin):
     stewarded_target.allow_tags = True
 
 
-class StewardNotificationAdmin(BaseStewardAdminMixin, MonitorAdmin):
+class StewardNotificationAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 
     fields = ('stewarded_target', 'name', 'use', 'support_organization',
-              'land_tenure_status', 'include_on_map', 'share_contact_details',
-              'phone', 'email', 'type',
+              'land_tenure_status', 'include_on_map', 'phone', 'email', 'type',
               'url', 'facebook_page',)
     list_display = ('pk', 'name', 'stewarded_target',)
     readonly_fields = ('content_type', 'object_id', 'stewarded_target',)
 
 
-class StewardProjectAdmin(BaseStewardAdminMixin, admin.ModelAdmin):
+class StewardProjectAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 
-    fields = ('stewarded_target', 'name', 'use', 'support_organization',
-              'land_tenure_status', 'include_on_map', 'organizer',
-              'date_started', 'external_id', 'steward_notification_link',)
-    list_display = ('pk', 'name', 'stewarded_target', 'organizer', 'use',
-                    'include_on_map',)
+    fields = ('stewarded_target', 'project_name', 'use',
+              'support_organization', 'land_tenure_status', 'include_on_map',
+              'organizer', 'date_started', 'external_id',
+              'steward_notification_link',)
+    list_display = ('pk', 'project_name', 'stewarded_target', 'organizer',
+                    'use', 'include_on_map',)
     list_filter = ('use', 'include_on_map',)
     readonly_fields = ('content_type', 'object_id', 'stewarded_target',
                        'steward_notification_link',)
-    search_fields = ('name',)
+    search_fields = ('project_name',)
 
     def steward_notification_link(self, obj):
         try:
@@ -52,7 +49,3 @@ class StewardProjectAdmin(BaseStewardAdminMixin, admin.ModelAdmin):
         except Exception:
             return '(none)'
     steward_notification_link.allow_tags = True
-
-
-admin.site.register(StewardNotification, StewardNotificationAdmin)
-admin.site.register(StewardProject, StewardProjectAdmin)
