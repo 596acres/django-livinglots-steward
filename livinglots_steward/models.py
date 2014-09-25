@@ -19,7 +19,7 @@ class OptedInStewardProjectManager(models.Manager):
 
 
 class StewardProjectMixin(models.Model):
-
+    objects = models.Manager()
     opted_in = OptedInStewardProjectManager()
 
     project_name = models.CharField(_('project name'),
