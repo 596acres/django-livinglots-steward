@@ -60,6 +60,7 @@ class StewardProjectMixin(models.Model):
 
 
 class BaseStewardProject(StewardProjectMixin):
+    started_here = models.BooleanField(default=False)
 
     content_type = models.ForeignKey(ContentType, related_name='+')
     object_id = models.PositiveIntegerField()
