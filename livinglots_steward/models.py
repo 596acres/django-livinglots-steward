@@ -12,8 +12,8 @@ class OptedInStewardProjectManager(models.Manager):
     to be included on the map.
     """
 
-    def get_query_set(self):
-        return super(OptedInStewardProjectManager, self).get_query_set().filter(
+    def get_queryset(self):
+        return super(OptedInStewardProjectManager, self).get_queryset().filter(
             include_on_map=True,
         )
 
