@@ -29,8 +29,8 @@ class StewardNotificationAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 class StewardProjectAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 
     fields = ('stewarded_target', 'project_name', 'use',
-              'support_organization', 'land_tenure_status', 'include_on_map',
-              'organizer', 'date_started', 'external_id',
+              'support_organization', 'started_here', 'land_tenure_status',
+              'include_on_map', 'organizer', 'date_started', 'external_id',
               'steward_notification_link',)
     list_display = ('pk', 'project_name', 'stewarded_target', 'organizer',
                     'use', 'include_on_map',)
