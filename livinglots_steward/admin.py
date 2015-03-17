@@ -28,15 +28,18 @@ class StewardNotificationAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 
 class StewardProjectAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 
-    fields = ('stewarded_target', 'project_name', 'use',
-              'support_organization', 'started_here', 'land_tenure_status',
-              'include_on_map', 'organizer', 'date_started', 'external_id',
-              'steward_notification_link',)
+    fields = (
+        ('project_name', 'use',),
+        ('stewarded_target', 'content_object',),
+        'organizer', 'steward_notification_link',
+        ('support_organization', 'land_tenure_status',),
+        ('started_here', 'include_on_map',),
+        ('date_started', 'external_id',),
+    )
     list_display = ('pk', 'project_name', 'stewarded_target', 'organizer',
                     'use', 'include_on_map',)
     list_filter = ('use', 'include_on_map',)
-    readonly_fields = ('content_type', 'object_id', 'stewarded_target',
-                       'steward_notification_link',)
+    readonly_fields = ('stewarded_target', 'steward_notification_link',)
     search_fields = ('project_name',)
 
     def steward_notification_link(self, obj):
