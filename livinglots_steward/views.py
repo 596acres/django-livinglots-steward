@@ -4,7 +4,7 @@ from django.views.generic import CreateView
 from braces.views import FormValidMessageMixin
 from django_monitor.views import MonitorMixin
 
-from livinglots_genericviews import AddGenericMixin
+from livinglots_genericviews.views import AddGenericMixin
 
 
 class BaseAddStewardNotificationView(FormValidMessageMixin, MonitorMixin,
