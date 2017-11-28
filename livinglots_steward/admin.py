@@ -30,7 +30,7 @@ class StewardProjectAdminMixin(StewardAdminMixin, admin.ModelAdmin):
 
     fields = (
         ('project_name', 'use',),
-        ('stewarded_target', 'content_object',),
+        ('stewarded_target',),
         'organizer', 'steward_notification_link',
         ('support_organization', 'land_tenure_status',),
         ('started_here', 'include_on_map',),
